@@ -7,6 +7,9 @@
     "default_popup": "hello.html",
     "default_icon": "hello_extensions.png"
   },
+  "chrome_url_overrides": {
+    "pageToOverride": "myPage.html"
+  },
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
