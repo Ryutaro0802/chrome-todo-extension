@@ -1,5 +1,5 @@
 import { element, escapeSpecialChars } from "./view/html-util.js";
-console.log(escapeSpecialChars`aaa`);
+
 export class App {
   mount() {
     const formElement = document.querySelector("#js-form");
