@@ -1,4 +1,10 @@
-import { element, escapeSpecialChars } from "./view/html-util.js";
+import { element } from "./view/html-util.js";
+import { EventEmitter } from './EventEmitter.js';
+
+const event = new EventEmitter();
+event.addEventListener('one', () => console.log('one'));
+event.addEventListener('two', () => console.log('two'));
+event.emit('one');
 
 export class App {
   mount() {
