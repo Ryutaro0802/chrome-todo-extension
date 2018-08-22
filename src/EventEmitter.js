@@ -1,6 +1,5 @@
 export class EventEmitter {
   constructor() {
-    // 登録する[イベント名、 Set(リスナー関数)]を管理数Map
     this._listeners = new Map();
   }
 
@@ -9,7 +8,7 @@ export class EventEmitter {
    * @param {string} type イベント名
    * @param {Function} listener イベントリスナー
    */
-  addEventListener(type, listener) {
+  addEventLister(type, listener) {
     if (!this._listeners.has(type)) {
       this._listeners.set(type, new Set());
     }
@@ -18,7 +17,7 @@ export class EventEmitter {
   }
 
   /**
-   * 指定したイベントをディスパッチ
+   * 指定したイベントをディスパッチする
    * @param {string} type イベント名
    */
   emit(type) {
@@ -32,11 +31,11 @@ export class EventEmitter {
   }
 
   /**
-   * 指定したイベントリスナーを解除する
+   * 指定したイベントのイベントリスナーを解除する
    * @param {string} type イベント名
    * @param {Function} listener イベントリスナー
    */
-  removeEventListener(type, listener) {
+  removeEventLister(type, listener) {
     const listenerSet = this._listeners.get(type);
     if (!listenerSet) {
       return;
