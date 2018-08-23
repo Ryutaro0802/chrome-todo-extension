@@ -17,20 +17,6 @@ export class EventEmitter {
   }
 
   /**
-   * 指定したイベントをディスパッチする
-   * @param {string} type イベント名
-   */
-  emit(type) {
-    const listenerSet = this._listeners.get(type);
-    if (!listenerSet) {
-      return;
-    }
-    listenerSet.forEach(listener => {
-      listener.call(this);
-    });
-  }
-
-  /**
    * 指定したイベントのイベントリスナーを解除する
    * @param {string} type イベント名
    * @param {Function} listener イベントリスナー
@@ -44,6 +30,20 @@ export class EventEmitter {
       if (ownListener === listener) {
         listenerSet.delete(listener);
       }
+    });
+  }
+
+  /**
+   * 指定したイベントをディスパッチする
+   * @param {string} type イベント名
+   */
+  emit(type) {
+    const listenerSet = this._listeners.get(type);
+    if (!listenerSet) {
+      return;
+    }
+    listenerSet.forEach(listener => {
+      listener.call(this);
     });
   }
 }
