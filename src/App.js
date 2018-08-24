@@ -56,10 +56,7 @@ export class App {
 
     formElement.addEventListener("submit", (event) => {
       event.preventDefault();
-      this.todoListModel.addTodo(new TodoItemModel({
-        title: inputElement.value,
-        completed: false
-      }));
+      this.handleAdd(inputElement.value);
       inputElement.value = "";
     });
   }
