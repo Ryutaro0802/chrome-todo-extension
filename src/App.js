@@ -53,6 +53,10 @@ export class App {
     this.todoListModel.deleteTodo({ id });
   }
 
+  handleEdit({ id }) {
+    this.todoListModel.editTodo({ id });
+  }
+
   mount() {
     const formElement = document.querySelector("#js-form");
     const inputElement = document.querySelector("#js-form-input");
@@ -67,11 +71,14 @@ export class App {
         },
         onDeleteTodo: ({ id }) => {
           this.handleDelete({ id });
+        },
+        onEditTodo: ({ id }) => {
+          this.handleEdit({ id });
         }
       });
 
       render(todoListElement, todoListContainerElement);
-      todoCountElement.textContent = `Todoアイテム数: ${
+      todoCountElement.textContent = `Todo Items: ${
         this.todoListModel.totalCount
       }`;
       setItems(this.todoItemStorageKey, JSON.stringify(todoItems));

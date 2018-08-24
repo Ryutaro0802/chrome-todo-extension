@@ -2,13 +2,22 @@
 
 <head>
     <title>TODO</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="./css/app.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="todoapp">
+    <!-- <i class="material-icons">face</i> -->
+    <div class="todo-app">
         <form id="js-form">
-            <input id="js-form-input" class="new-todo" type="text" placeholder="What need to be done?" autocomplete="off">
+            <input 
+                id="js-form-input"
+                class="new-todo"
+                type="text"
+                placeholder="What need to be done?"
+                autocomplete="off"
+                autofocus
+            >
         </form>
         <div id="js-todo-list" class="todo-list"></div>
         <footer class="footer">

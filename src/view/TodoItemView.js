@@ -8,26 +8,34 @@ export class TodoItemView {
    * @param {function({id:string)}} onDeleteTodo 削除ボタンのクリックイベントリスナー
    * @returns {HTMLElement}
    */
-  createElement(todoItem, { onUpdateTodo, onDeleteTodo }) {
+  createElement(todoItem, { onUpdateTodo, onDeleteTodo, onEditTodo }) {
     const todoItemElement = todoItem.completed
-      ? element`<li><input type="checkbox" class="checkbox" checked>
-                                    <s>${todoItem.title}</s>
-                                    <button class="delete">x</button>
-                                </input></li>`
-      : element`<li><input type="checkbox" class="checkbox">
-                                    ${todoItem.title}
-                                    <button class="delete">x</button>
-                                </input></li>`;
+      ? element`<li class="is-complete">
+          <i class="material-icons checkbox">check_box</i>
+          <span class="text"><s>${todoItem.title}</s></span>
+          <button class="delete"><i class="material-icons">close</i></button>
+        </li>`
+      : element`<li>
+        <i class="material-icons checkbox">check_box_outline_blank</i>
+        <span class="text">${todoItem.title}</span>
+        <button class="delete"><i class="material-icons">close</i></button>
+      </li>`;
     const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
-    inputCheckboxElement.addEventListener("change", () => {
+    inputCheckboxElement.addEventListener('click', () => {
       onUpdateTodo({
         id: todoItem.id,
         completed: !todoItem.completed
       });
     });
     const deleteButtonElement = todoItemElement.querySelector(".delete");
-    deleteButtonElement.addEventListener("click", () => {
+    deleteButtonElement.addEventListener('click', () => {
       onDeleteTodo({
+        id: todoItem.id
+      });
+    });
+    const textElement = todoItemElement.querySelector('.text');
+    textElement.addEventListener('click', () => {
+      onEditTodo({
         id: todoItem.id
       });
     });
