@@ -1,4 +1,4 @@
-import { element } from "../../util/html.js";
+import { element } from "../util/html.js";
 
 export class TodoItemView {
   /**

@@ -1,4 +1,4 @@
-import { render } from "../util/html.js";
+import { render } from "./util/html.js";
 import { TodoListView } from "./view/TodoListView.js";
 import { TodoItemModel } from "./model/TodoItemModel.js";
 import { TodoListModel } from "./model/TodoListModel.js";
