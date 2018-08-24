@@ -35,8 +35,6 @@ export function element(strings, ...values) {
  * @param {HTMLElement} containerElement コンテナ要素
  */
 export function render(bodyElement, containerElement) {
-  // rootElementの中身を空にする
   containerElement.innerHTML = "";
-  // rootElementの直下にbodyElementを追加する
   containerElement.appendChild(bodyElement);
 }
