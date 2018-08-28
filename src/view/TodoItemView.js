@@ -15,10 +15,15 @@ export class TodoItemView {
     { onUpdateTodo, onDeleteTodo, onEditTodo, onEditCompleteTodo }
   ) {
     const todoItemElement = (() => {
-      const isCompleteClassName = todoItem.complete ? "is-complete" : "";
+      const isCompleteClassName = todoItem.completed ? "is-complete" : "";
+      // todo 要修正
+      const checkIcon = todoItem.completed
+        ? `<i class="material-icons checkbox">check_circle</i>`
+        : `<i class="material-icons checkbox">check_circle_outline</i>`;
+      console.log(checkIcon);
       if (todoItem.isEditing) {
         return element`<li class="${isCompleteClassName}">
-          <i class="material-icons checkbox">check_box</i>
+          ${checkIcon}
           <div class="text">
             <input type="text" value="${todoItem.title}">
           </div>
@@ -26,7 +31,7 @@ export class TodoItemView {
         </li>`;
       } else {
         return element`<li class="${isCompleteClassName}">
-          <i class="material-icons checkbox">check_box</i>
+          ${checkIcon}
           <div class="text">
             <span class="todo-title">${todoItem.title}</span>
           </div>
@@ -36,12 +41,11 @@ export class TodoItemView {
     })();
 
     const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
-    inputCheckboxElement.addEventListener("click", () => {
-      onUpdateTodo({
-        id: todoItem.id,
-        completed: !todoItem.completed
+    if (inputCheckboxElement) {
+      inputCheckboxElement.addEventListener("click", () => {
+        onUpdateTodo({ id: todoItem.id, completed: !todoItem.completed });
       });
-    });
+    }
 
     const deleteButtonElement = todoItemElement.querySelector(".delete");
     deleteButtonElement.addEventListener("click", () => {
