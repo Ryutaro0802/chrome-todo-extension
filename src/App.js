@@ -53,8 +53,8 @@ export class App {
     this.todoListModel.deleteTodo({ id });
   }
 
-  handleEdit({ id }) {
-    this.todoListModel.editTodo({ id });
+  handleEdit({ id, title }) {
+    this.todoListModel.editTodo({ id, title });
   }
 
   mount() {

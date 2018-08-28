@@ -6,6 +6,7 @@ export class TodoItemView {
    * @param {TodoItemModel} todoItem
    * @param {function({id:string, completed: boolean})} onUpdateTodo チェックボックスの更新イベントリスナー
    * @param {function({id:string)}} onDeleteTodo 削除ボタンのクリックイベントリスナー
+   * @param {function({id:string)}} onEditTodo TODO アイテムのテキストを編集するイベントリスナー
    * @returns {HTMLElement}
    */
   createElement(todoItem, { onUpdateTodo, onDeleteTodo, onEditTodo }) {
@@ -21,23 +22,19 @@ export class TodoItemView {
         <button class="delete"><i class="material-icons">close</i></button>
       </li>`;
     const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
-    inputCheckboxElement.addEventListener('click', () => {
+    inputCheckboxElement.addEventListener("click", () => {
       onUpdateTodo({
         id: todoItem.id,
         completed: !todoItem.completed
       });
     });
     const deleteButtonElement = todoItemElement.querySelector(".delete");
-    deleteButtonElement.addEventListener('click', () => {
-      onDeleteTodo({
-        id: todoItem.id
-      });
+    deleteButtonElement.addEventListener("click", () => {
+      onDeleteTodo({ id: todoItem.id });
     });
-    const textElement = todoItemElement.querySelector('.text');
-    textElement.addEventListener('click', () => {
-      onEditTodo({
-        id: todoItem.id
-      });
+    const textElement = todoItemElement.querySelector(".text");
+    textElement.addEventListener("click", () => {
+      onEditTodo({ id: todoItem.id });
     });
     return todoItemElement;
   }
