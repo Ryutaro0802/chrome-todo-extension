@@ -89,8 +89,8 @@ export class App {
         onEditTodo: ({ id }) => {
           this.handleEdit({ id });
         },
-        onEditCompleteTodo: ({ id }) => {
-          this.handleEditComplete({ id });
+        onEditCompleteTodo: ({ id, title }) => {
+          this.handleEditComplete({ id, title });
         }
       });
 

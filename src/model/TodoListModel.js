@@ -76,13 +76,33 @@ export class TodoListModel extends EventEmitter {
     this.emitChange();
   }
 
+  /**
+   * 指定したidのTodoItemを編集状態にする
+   * @param {number} id
+   */
   editTodo({ id }) {
     const todoItem = this.items.find(todo => todo.id === id);
     if (!todoItem) {
       return;
     }
     todoItem.isEditing = true;
-    console.log('change');
+    this.emitChange();
+  }
+
+  /**
+   * 指定したidのTodoItemのtitleを更新してisEditingの状態を変更
+   * @param {number} id
+   * @param {string} title
+   */
+  editCompleteTodo({ id, title }) {
+    const todoItem = this.items.find(todo => todo.id === id);
+    if (!todoItem) {
+      return;
+    }
+    todoItem.isEditing = false;
+    console.log(todoItem)
+    console.log(title)
+    todoItem.title = title;
     this.emitChange();
   }
 }

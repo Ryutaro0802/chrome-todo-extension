@@ -7,23 +7,29 @@ export class TodoItemView {
    * @param {function({id:string, completed: boolean})} onUpdateTodo チェックボックスの更新イベントリスナー
    * @param {function({id:string)}} onDeleteTodo 削除ボタンのクリックイベントリスナー
    * @param {function({id:string)}} onEditTodo TODO アイテムのテキストを編集するイベントリスナー
+   * @param {function({id:string)}} onEditCompleteTodo TODO アイテムのテキストが編集し終わったら呼ぶリスナー
    * @returns {HTMLElement}
    */
-  createElement(todoItem, { onUpdateTodo, onDeleteTodo, onEditTodo }) {
+  createElement(
+    todoItem,
+    { onUpdateTodo, onDeleteTodo, onEditTodo, onEditCompleteTodo }
+  ) {
     const todoItemElement = (() => {
       const isCompleteClassName = todoItem.complete ? "is-complete" : "";
       if (todoItem.isEditing) {
         return element`<li class="${isCompleteClassName}">
           <i class="material-icons checkbox">check_box</i>
-          <span class="text"><input type="text" value="${
-            todoItem.title
-          }"></span>
+          <div class="text">
+            <input type="text" value="${todoItem.title}">
+          </div>
           <button class="delete"><i class="material-icons">close</i></button>
         </li>`;
       } else {
         return element`<li class="${isCompleteClassName}">
           <i class="material-icons checkbox">check_box</i>
-          <span class="text">${todoItem.title}</span>
+          <div class="text">
+            <span class="todo-title">${todoItem.title}</span>
+          </div>
           <button class="delete"><i class="material-icons">close</i></button>
         </li>`;
       }
@@ -42,22 +48,23 @@ export class TodoItemView {
       onDeleteTodo({ id: todoItem.id });
     });
 
-    const textElement = todoItemElement.querySelector(".text");
-    textElement.addEventListener("click", () => {
-      onEditTodo({
-        id: todoItem.id
+    const todoTitleElement = todoItemElement.querySelector(".todo-title");
+    if (todoTitleElement) {
+      todoTitleElement.addEventListener("click", () => {
+        onEditTodo({ id: todoItem.id });
       });
-    });
+    }
 
-    const inputElement = textElement.querySelector("input");
+    const inputElement = todoItemElement.querySelector("input[type='text']");
     if (inputElement) {
       setTimeout(() => {
-        // TODO あとでなおす
-        const textLength = textElement.textContent;
-        console.log(textLength);
+        const valueLength = inputElement.value.length;
         inputElement.focus();
-        inputElement.setSelectionRange(textLength, textLength);
+        inputElement.setSelectionRange(valueLength, valueLength);
       }, 20);
+      inputElement.addEventListener("blur", () => {
+        onEditCompleteTodo({ id: todoItem.id, title: inputElement.value });
+      });
     }
 
     return todoItemElement;
