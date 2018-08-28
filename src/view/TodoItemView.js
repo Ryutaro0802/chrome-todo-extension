@@ -11,11 +11,13 @@ export class TodoItemView {
    */
   createElement(todoItem, { onUpdateTodo, onDeleteTodo, onEditTodo }) {
     const todoItemElement = (() => {
-      const isCompleteClassName = todoItem.complete ? 'is-complete' : '';
+      const isCompleteClassName = todoItem.complete ? "is-complete" : "";
       if (todoItem.isEditing) {
         return element`<li class="${isCompleteClassName}">
           <i class="material-icons checkbox">check_box</i>
-          <span class="text"><input type="text" value="${todoItem.title}"></span>
+          <span class="text"><input type="text" value="${
+            todoItem.title
+          }"></span>
           <button class="delete"><i class="material-icons">close</i></button>
         </li>`;
       } else {
@@ -25,20 +27,6 @@ export class TodoItemView {
           <button class="delete"><i class="material-icons">close</i></button>
         </li>`;
       }
-
-      // if (todoItem.completed) {
-      //   return element`<li class="is-complete">
-      //     <i class="material-icons checkbox">check_box</i>
-      //     <span class="text"><s>${todoItem.title}</s></span>
-      //     <button class="delete"><i class="material-icons">close</i></button>
-      //   </li>`;
-      // } else {
-      //   return element`<li>
-      //     <i class="material-icons checkbox">check_box_outline_blank</i>
-      //     <span class="text">${todoItem.title}</span>
-      //     <button class="delete"><i class="material-icons">close</i></button>
-      //   </li>`;
-      // }
     })();
 
     const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
@@ -60,12 +48,16 @@ export class TodoItemView {
         id: todoItem.id
       });
     });
-    
-    const inputElement = textElement.querySelector('input');
+
+    const inputElement = textElement.querySelector("input");
     if (inputElement) {
-      console.log(inputElement);
-      inputElement.focus();
-      debugger;
+      setTimeout(() => {
+        // TODO あとでなおす
+        const textLength = textElement.textContent;
+        console.log(textLength);
+        inputElement.focus();
+        inputElement.setSelectionRange(textLength, textLength);
+      }, 20);
     }
 
     return todoItemElement;

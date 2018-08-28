@@ -29,6 +29,10 @@ body {
   color: #333;
 }
 
+input[type="text"] {
+  font-family: sans-serif;
+}
+
 :focus {
   outline: none;
 }
@@ -113,6 +117,12 @@ ul, ol {
 
 .todo-list li .checkbox:hover {
   cursor: pointer;
+}
+
+.todo-list li input[type="text"] {
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 /* footer */
