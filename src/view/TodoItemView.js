@@ -10,17 +10,37 @@ export class TodoItemView {
    * @returns {HTMLElement}
    */
   createElement(todoItem, { onUpdateTodo, onDeleteTodo, onEditTodo }) {
-    const todoItemElement = todoItem.completed
-      ? element`<li class="is-complete">
+    const todoItemElement = (() => {
+      const isCompleteClassName = todoItem.complete ? 'is-complete' : '';
+      if (todoItem.isEditing) {
+        return element`<li class="${isCompleteClassName}">
           <i class="material-icons checkbox">check_box</i>
-          <span class="text"><s>${todoItem.title}</s></span>
+          <span class="text"><input type="text" value="${todoItem.title}"></span>
           <button class="delete"><i class="material-icons">close</i></button>
-        </li>`
-      : element`<li>
-        <i class="material-icons checkbox">check_box_outline_blank</i>
-        <span class="text">${todoItem.title}</span>
-        <button class="delete"><i class="material-icons">close</i></button>
-      </li>`;
+        </li>`;
+      } else {
+        return element`<li class="${isCompleteClassName}">
+          <i class="material-icons checkbox">check_box</i>
+          <span class="text">${todoItem.title}</span>
+          <button class="delete"><i class="material-icons">close</i></button>
+        </li>`;
+      }
+
+      // if (todoItem.completed) {
+      //   return element`<li class="is-complete">
+      //     <i class="material-icons checkbox">check_box</i>
+      //     <span class="text"><s>${todoItem.title}</s></span>
+      //     <button class="delete"><i class="material-icons">close</i></button>
+      //   </li>`;
+      // } else {
+      //   return element`<li>
+      //     <i class="material-icons checkbox">check_box_outline_blank</i>
+      //     <span class="text">${todoItem.title}</span>
+      //     <button class="delete"><i class="material-icons">close</i></button>
+      //   </li>`;
+      // }
+    })();
+
     const inputCheckboxElement = todoItemElement.querySelector(".checkbox");
     inputCheckboxElement.addEventListener("click", () => {
       onUpdateTodo({
@@ -28,14 +48,26 @@ export class TodoItemView {
         completed: !todoItem.completed
       });
     });
+
     const deleteButtonElement = todoItemElement.querySelector(".delete");
     deleteButtonElement.addEventListener("click", () => {
       onDeleteTodo({ id: todoItem.id });
     });
+
     const textElement = todoItemElement.querySelector(".text");
     textElement.addEventListener("click", () => {
-      onEditTodo({ id: todoItem.id });
+      onEditTodo({
+        id: todoItem.id
+      });
     });
+    
+    const inputElement = textElement.querySelector('input');
+    if (inputElement) {
+      console.log(inputElement);
+      inputElement.focus();
+      debugger;
+    }
+
     return todoItemElement;
   }
 }

@@ -53,8 +53,22 @@ export class App {
     this.todoListModel.deleteTodo({ id });
   }
 
-  handleEdit({ id, title }) {
-    this.todoListModel.editTodo({ id, title });
+  /**
+   * Todoを編集する時によばれるリスナー関数
+   * @param {number} id
+   * @param {string} title
+   */
+  handleEdit({ id }) {
+    this.todoListModel.editTodo({ id });
+  }
+
+  /**
+   * Todoを編集完了する時よばれるリスナー関数
+   * @param {number} id
+   * @param {string} title
+   */
+  handleEditComplete({ id, title }) {
+    this.todoListModel.editCompleteTodo({ id, title });
   }
 
   mount() {
@@ -74,6 +88,9 @@ export class App {
         },
         onEditTodo: ({ id }) => {
           this.handleEdit({ id });
+        },
+        onEditCompleteTodo: ({ id }) => {
+          this.handleEditComplete({ id });
         }
       });
 

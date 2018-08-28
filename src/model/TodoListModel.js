@@ -76,11 +76,13 @@ export class TodoListModel extends EventEmitter {
     this.emitChange();
   }
 
-  editTodo({ id, title }) {
+  editTodo({ id }) {
     const todoItem = this.items.find(todo => todo.id === id);
     if (!todoItem) {
       return;
     }
-    todoItem.title = title;
+    todoItem.isEditing = true;
+    console.log('change');
+    this.emitChange();
   }
 }

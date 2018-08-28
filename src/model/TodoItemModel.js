@@ -9,5 +9,6 @@ export class TodoItemModel {
         this.id = todoIdx++;
         this.title = title;
         this.completed = completed;
+        this.isEditing = false;
     }
 }

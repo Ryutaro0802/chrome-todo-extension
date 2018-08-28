@@ -1,7 +1,11 @@
-/* reset */
+/* 
+* reset 
+*/
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -22,46 +26,52 @@ button {
 body {
   font-family: sans-serif;
   line-height: 1.5;
-  background: #f5f5f5;
-  color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
-  margin: 0 auto;
-  font-weight: 300;
+  color: #333;
 }
 
 :focus {
   outline: none;
 }
 
-/* component */
+ul, ol {
+  list-style: none;
+}
+
+/* 
+* component 
+*/
+
+/* todo-app */
 
 .todo-app {
-  background: #fff;
-  margin: 130px 0 40px 0;
-  position: relative;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  margin: 100px auto 0;
+  max-width: 550px;
 }
 
 .todo-app input::placeholder {
+  color: #c3c3c3;
 }
+/* form-container */
+
+.form-container {
+  /* margin-bottom: 20px; */
+}
+
+/* new-todo */
 
 .new-todo {
-  position: relative;
-  margin: 0;
   width: 100%;
   font-size: 24px;
-  border: 0;
-  padding: 16px 16px 16px 60px;
-  border: none;
-  background: rgba(0, 0, 0, 0.003);
-  box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.03);
+  padding: 16px 16px 16px 16px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #ededed;
 }
 
+/* todo-list */
+
 .todo-list ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .todo-list li {
@@ -105,48 +115,10 @@ body {
   cursor: pointer;
 }
 
+/* footer */
+
 .footer {
   color: #777;
   padding: 10px 15px;
   border-top: 1px solid #e6e6e6;
 }
-
-
-.trash-solid.icon {
-  color: #000;
-  position: absolute;
-  margin-left: 5px;
-  margin-top: 7px;
-  width: 9px;
-  height: 10px;
-  border-left: solid 1px currentColor;
-  border-right: solid 1px currentColor;
-  border-bottom: solid 1px currentColor;
-  border-radius: 0 0 2px 2px;
-  background-color: currentColor;
-}
-
-.trash-solid.icon:before {
-  content: '';
-  position: absolute;
-  left: -4px;
-  top: -2px;
-  width: 17px;
-  height: 1px;
-  background-color: currentColor;
-}
-
-.trash-solid.icon:after {
-  content: '';
-  position: absolute;
-  left: 0px;
-  top: -5px;
-  width: 7px;
-  height: 2px;
-  border-left: solid 1px currentColor;
-  border-right: solid 1px currentColor;
-  border-top: solid 1px currentColor;
-  background-color: currentColor;
-  border-radius: 4px 4px 0 0;
-}
-
