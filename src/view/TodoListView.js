@@ -14,7 +14,6 @@ export class TodoListView {
     todoItems,
     { onUpdateTodo, onDeleteTodo, onEditTodo, onEditCompleteTodo }
   ) {
-    console.log(todoItems.length);
     if (todoItems.length) {
       const todoListElement = element`<ul />`;
       todoItems.forEach(todoItem => {
