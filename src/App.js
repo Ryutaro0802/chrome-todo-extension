@@ -13,13 +13,15 @@ export class App {
 
   /**
    * localStorage からTodoListのアイテムを読み込む
+   * @param {Array} storageItems localStorageのitem
    */
-  handleLoad() {
-    const storageItems = JSON.parse(getItems(this.todoItemStorageKey));
-    if (storageItems) {
+  handleLoad(storageItems) {
+    if (storageItems.length) {
       storageItems.forEach(item => {
         this.handleAdd(item.title, item.completed);
       });
+    } else {
+      this.todoListModel.emitChange();
     }
   }
 
@@ -101,13 +103,14 @@ export class App {
       setItems(this.todoItemStorageKey, JSON.stringify(todoItems));
     });
 
-    formElement.addEventListener("submit", event => {
-      event.preventDefault();
+    formElement.addEventListener("submit", e => {
+      e.preventDefault();
       this.handleAdd(inputElement.value);
       inputElement.value = "";
     });
 
     // localStorage からTodoItemを読み込む
-    this.handleLoad();
+    const storageItems = JSON.parse(getItems(this.todoItemStorageKey));
+    this.handleLoad(storageItems);
   }
 }

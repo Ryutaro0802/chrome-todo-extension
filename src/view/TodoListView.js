@@ -10,18 +10,29 @@ export class TodoListView {
    * @param {function({id:string)}} onEditTodo TODO アイテムのテキストを編集するイベントリスナー
    * @returns {HTMLElement} TodoItemModelの配列に対応したリストのHTML要素
    */
-  createElement(todoItems,{ onUpdateTodo, onDeleteTodo, onEditTodo, onEditCompleteTodo }) {
-    const todoListElement = element`<ul />`;
-    todoItems.forEach(todoItem => {
-      const todoItemView = new TodoItemView();
-      const todoItemElement = todoItemView.createElement(todoItem, {
-        onDeleteTodo,
-        onUpdateTodo,
-        onEditTodo,
-        onEditCompleteTodo
+  createElement(
+    todoItems,
+    { onUpdateTodo, onDeleteTodo, onEditTodo, onEditCompleteTodo }
+  ) {
+    console.log(todoItems.length);
+    if (todoItems.length) {
+      const todoListElement = element`<ul />`;
+      todoItems.forEach(todoItem => {
+        const todoItemView = new TodoItemView();
+        const todoItemElement = todoItemView.createElement(todoItem, {
+          onDeleteTodo,
+          onUpdateTodo,
+          onEditTodo,
+          onEditCompleteTodo
+        });
+        todoListElement.appendChild(todoItemElement);
       });
-      todoListElement.appendChild(todoItemElement);
-    });
-    return todoListElement;
+      return todoListElement;
+    } else {
+      return element`<div class="no-tasks">
+        <i class="material-icons">sentiment_satisfied_alt</i>
+        <p>No tasks</p>
+      </div>`;
+    }
   }
 }
