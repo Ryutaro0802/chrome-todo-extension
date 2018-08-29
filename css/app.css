@@ -6,6 +6,8 @@
   --text-color: #5a5a5a;
   --place-holder-color: #c3c3c3;
   --border-color: #c4c4c4;
+  --emphasis-color: #cc9a9a;
+  --complete-color: #779fa9;
 
   /* text */
   --line-height: 1.5;
@@ -92,12 +94,9 @@ ul, ol {
   border-bottom: none;
 }
 
-.todo-list li input[type="checkbox"] {
-  width: 40px;
-}
-
 .todo-list li .text {
   flex-grow: 1;
+  padding: 0 16px;
 }
 
 .todo-list li.is-complete .text {
@@ -106,16 +105,16 @@ ul, ol {
 }
 
 .todo-list li .delete {
-  width: 40px;
-  color: #cc9a9a;
+  color: var(--emphasis-color);
 }
 
 .todo-list li .delete:hover {
   cursor: pointer;
 }
 
-.todo-list li .checkbox {
-  width: 40px;
+.todo-list li.is-complete .checkbox,
+.todo-list li .checkbox:hover {
+  color: var(--complete-color);
 }
 
 .todo-list li .checkbox:hover {
