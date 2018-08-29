@@ -13,7 +13,6 @@ export function element(strings, ...values) {
     const value = values[i - 1];
     return result + String(value) + string;
   });
-  console.log(htmlString);
   return htmlToElement(htmlString);
 }
 

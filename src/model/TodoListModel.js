@@ -100,8 +100,6 @@ export class TodoListModel extends EventEmitter {
       return;
     }
     todoItem.isEditing = false;
-    console.log(todoItem)
-    console.log(title)
     todoItem.title = title;
     this.emitChange();
   }

@@ -69,6 +69,12 @@ export class TodoItemView {
       inputElement.addEventListener("blur", () => {
         onEditCompleteTodo({ id: todoItem.id, title: inputElement.value });
       });
+      inputElement.addEventListener('keydown', e => {
+        const enterKeyNumber = 13;
+        if (e.keyCode === enterKeyNumber) {
+          onEditCompleteTodo({ id: todoItem.id, title: inputElement.value });
+        }
+      });
     }
 
     return todoItemElement;
