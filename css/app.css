@@ -9,6 +9,13 @@
   --emphasis-color: #cc9a9a;
   --complete-color: #779fa9;
 
+  /* dark-mode color */
+  --jet-black-color: #1c1a1a;
+  --light-color: #fefefe;
+  --new-todo-color: #c3c3c3;
+  --todo-list-color: #999696;
+  --todo-delete-color: #3e5c7f;
+
   /* text */
   --line-height: 1.5;
   --font-family: sans-serif;
@@ -144,4 +151,48 @@ ul, ol {
   color: var(--text-color);
   padding: 10px 15px;
   border-top: 1px solid var(--border-color);
+}
+
+/* dark-mode */
+.switch-mode {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transform: rotate(45deg);
+}
+
+.dark-mode {
+  background-color: var(--jet-black-color);
+}
+
+.dark-mode .switch-mode a {
+  color:  var(--light-color);
+}
+
+.switch-mode a {
+  color: var(--jet-black-color);
+  transition: 0.3s;
+}
+
+.switch-mode a:hover {
+  opacity: 0.5;
+}
+
+.dark-mode .new-todo {
+  color: var(--new-todo-color);
+  background-color: var(--jet-black-color);
+  border-color: var(--black-color);
+}
+
+.dark-mode .todo-list {
+  color: var(--todo-list-color);
+}
+
+.dark-mode .todo-list .delete {
+  color: var(--todo-delete-color);
+}
+
+.dark-mode .todo-list ul > li,
+.dark-mode .footer {
+  border-color: var(--black-color);
 }

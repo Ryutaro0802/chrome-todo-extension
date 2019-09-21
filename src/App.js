@@ -3,6 +3,7 @@ import { setItems, getItems } from "./util/store.js";
 import { TodoListView } from "./view/TodoListView.js";
 import { TodoItemModel } from "./model/TodoItemModel.js";
 import { TodoListModel } from "./model/TodoListModel.js";
+import "./view/DarkMode.js";
 
 export class App {
   constructor() {
