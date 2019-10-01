@@ -1,19 +1,20 @@
 import { element } from "../util/html.js";
 
 export class SwitchDarkModeView {
-  constructor() {
-    // this.init();
+  constructor({ mode }) {
+    this.mode = mode;
   }
 
   createElement({ onChangeMode }) {
-    const switchDarkModeElement = element`        <div class="switch-mode">
+    // TODO    i要素の中を書き換える
+    const switchDarkModeElement = element`<div class="switch-mode">
             <a href="#" class="jsc-switch-mode">
                 <i class="material-icons jsc-mode-icon"></i>
             </a>
         </div>`;
 
     const switchDarkModeAncElement = switchDarkModeElement.querySelector("a");
-    switchDarkModeAncElement.addEventListener('click', () => {
+    switchDarkModeAncElement.addEventListener("click", () => {
       onChangeMode();
     });
 
