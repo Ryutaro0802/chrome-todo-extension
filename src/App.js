@@ -1,15 +1,18 @@
 import { render } from "./util/html.js";
 import { setItems, getItems } from "./util/store.js";
 import { TodoListView } from "./view/TodoListView.js";
+import { SwitchDarkModeView } from "./view/SwitchDarkModeView.js";
 import { TodoItemModel } from "./model/TodoItemModel.js";
 import { TodoListModel } from "./model/TodoListModel.js";
-import "./view/DarkMode.js";
 
 export class App {
   constructor() {
     this.todoListView = new TodoListView();
+    this.SwitchDarkModeView = new SwitchDarkModeView();
     this.todoListModel = new TodoListModel([]);
-    this.todoItemStorageKey = "todoItemStorageKey";
+    this.mode = "light";
+    this.TODO_ITEM_STORAGE_KEY = "todoItemStorageKey";
+    this.MODE_KEY = "mode";
   }
 
   /**
@@ -24,6 +27,15 @@ export class App {
     } else {
       this.todoListModel.emitChange();
     }
+  }
+
+  /**
+   * colorModeの切り替え
+   */
+  handleChangeMode() {
+    console.log("handleChange");
+    this.mode = this.mode === "light" ? "dark" : "light";
+    setItems(this.MODE_KEY, JSON.stringify(this.mode));
   }
 
   /**
@@ -79,6 +91,14 @@ export class App {
     const inputElement = document.querySelector("#js-form-input");
     const todoCountElement = document.querySelector("#js-todo-count");
     const todoListContainerElement = document.querySelector("#js-todo-list");
+    const switchModeContainerElement = document.querySelector(
+      "#js-switch-mode-container"
+    );
+    const darkModeElement = this.SwitchDarkModeView.createElement({
+      onChangeMode: () => {
+        this.handleChangeMode();
+      }
+    });
 
     this.todoListModel.onChange(() => {
       const todoItems = this.todoListModel.getTodoItems();
@@ -98,11 +118,11 @@ export class App {
       });
 
       render(todoListElement, todoListContainerElement);
-      todoCountElement.textContent = `Todo Items: ${
-        this.todoListModel.totalCount
-      }`;
-      setItems(this.todoItemStorageKey, JSON.stringify(todoItems));
+      todoCountElement.textContent = `Todo Items: ${this.todoListModel.totalCount}`;
+      setItems(this.TODO_ITEM_STORAGE_KEY, JSON.stringify(todoItems));
     });
+
+    render(darkModeElement, switchModeContainerElement);
 
     formElement.addEventListener("submit", e => {
       e.preventDefault();
@@ -111,7 +131,7 @@ export class App {
     });
 
     // localStorage からTodoItemを読み込む
-    const storageItems = JSON.parse(getItems(this.todoItemStorageKey));
+    const storageItems = JSON.parse(getItems(this.TODO_ITEM_STORAGE_KEY));
     this.handleLoad(storageItems);
   }
 }
