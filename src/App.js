@@ -7,12 +7,13 @@ import { TodoListModel } from "./model/TodoListModel.js";
 
 export class App {
   constructor() {
+    this.TODO_ITEM_STORAGE_KEY = "todoItemStorageKey";
+    this.MODE_KEY = "mode";
+    this.DARK_MODE_CLASS_NAME = "dark-mode";
     this.todoListView = new TodoListView();
     this.SwitchDarkModeView = new SwitchDarkModeView();
     this.todoListModel = new TodoListModel([]);
-    this.mode = "light";
-    this.TODO_ITEM_STORAGE_KEY = "todoItemStorageKey";
-    this.MODE_KEY = "mode";
+    this.mode = JSON.parse(getItems(this.MODE_KEY)) || "light";
   }
 
   /**
@@ -33,9 +34,29 @@ export class App {
    * colorModeの切り替え
    */
   handleChangeMode() {
-    console.log("handleChange");
+    const switchModeContainerElement = document.querySelector(
+      "#js-switch-mode-container"
+    );
+    const darkModeElement = this.SwitchDarkModeView.createElement({
+      onChangeMode: () => {
+        this.handleChangeMode();
+      },
+      mode: this.mode === "dark" ? "light" : "dark"
+    });
     this.mode = this.mode === "light" ? "dark" : "light";
     setItems(this.MODE_KEY, JSON.stringify(this.mode));
+    render(darkModeElement, switchModeContainerElement);
+
+    this.handleSwitchModeClass();
+  }
+
+  handleSwitchModeClass() {
+    const bodyElement = document.querySelector("body");
+    if (this.mode === "dark") {
+      bodyElement.classList.add(this.DARK_MODE_CLASS_NAME);
+    } else {
+      bodyElement.classList.remove(this.DARK_MODE_CLASS_NAME);
+    }
   }
 
   /**
@@ -97,7 +118,8 @@ export class App {
     const darkModeElement = this.SwitchDarkModeView.createElement({
       onChangeMode: () => {
         this.handleChangeMode();
-      }
+      },
+      mode: this.mode === "dark" ? "light" : "dark"
     });
 
     this.todoListModel.onChange(() => {
@@ -123,6 +145,7 @@ export class App {
     });
 
     render(darkModeElement, switchModeContainerElement);
+    this.handleSwitchModeClass();
 
     formElement.addEventListener("submit", e => {
       e.preventDefault();
