@@ -7,21 +7,13 @@
 </head>
 
 <body>
+    <i class="material-icons jsc-mode-icon"></i>
     <div class="todo-app">
-        <div class="switch-mode">
-            <a href="#" class="jsc-switch-mode">
-                <i class="material-icons jsc-mode-icon"></i>
-            </a>
-        </div>
+        <div id="js-switch-mode-container"></div>
         <div class="form-container">
             <form id="js-form">
-                <input
-                    id="js-form-input" 
-                    class="new-todo" 
-                    type="text" 
-                    placeholder="What need to be done?" 
-                    autocomplete="off" autofocus
-                >
+                <input id="js-form-input" class="new-todo" type="text" placeholder="What need to be done?"
+                    autocomplete="off" autofocus>
             </form>
         </div>
         <div id="js-todo-list" class="todo-list"></div>

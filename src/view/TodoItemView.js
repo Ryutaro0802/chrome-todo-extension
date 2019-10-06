@@ -20,7 +20,7 @@ export class TodoItemView {
       const checkIcon = todoItem.completed
         ? `<i class="material-icons checkbox">check_circle</i>`
         : `<i class="material-icons checkbox">check_circle_outline</i>`;
-      
+
       if (todoItem.isEditing) {
         return element`<li class="${isCompleteClassName}">
           ${checkIcon}
